@@ -13,12 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/home/{name?}', function($name){
+Route::view('/', 'welcome');
 
-    dd($name);
-    return view('home', request()->input());
-});
+Route::get('/home/{id}', fn($id) => [
+    'id' => $id
+])->where('id', '[0-9]+');
+
+Route::fallback(fn () => [
+    'code' => '404',
+    'reason' => 'not defined therefor not found'
+]);
+
+//Route::redirect('/', '/home/2');
+Route::permanentRedirect('/', '/home/2');
+
+
