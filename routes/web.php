@@ -28,4 +28,10 @@ Route::fallback(fn () => [
 //Route::redirect('/', '/home/2');
 Route::permanentRedirect('/', '/home/2');
 
+$posts = ['post 0', 'post 1', 'post 2'];
+
+Route::get('/posts', fn () => $posts);
+Route::get('/posts/create', fn () => 'create post form');
+Route::get('/posts/{post}', fn ($post) => "Show $post");
+
 
