@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
 
-Route::get('/home/{id}', fn($id) => [
+/*Route::get('/home/{id}', fn($id) => [
     'id' => $id
-])->where('id', '[0-9]+');
+])->where('id', '[0-9]+');*/
 
 Route::fallback(fn () => [
     'code' => '404',
@@ -28,10 +28,11 @@ Route::fallback(fn () => [
 //Route::redirect('/', '/home/2');
 Route::permanentRedirect('/', '/home/2');
 
-$posts = ['post 0', 'post 1', 'post 2'];
+//$posts = ['post 0', 'post 1', 'post 2'];
+$posts = \DB::table('posts')->get();
 
 Route::get('/posts', fn () => $posts);
 Route::get('/posts/create', fn () => 'create post form');
-Route::get('/posts/{post}', fn ($post) => "Show $post");
+Route::get('/posts/{post}', fn ($posts) => "Show $posts");
 
 

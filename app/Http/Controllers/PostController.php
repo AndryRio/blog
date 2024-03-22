@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+
+use DB;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -13,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return ['post 0', 'post 1', 'post 2'];
+        return DB::table('posts')->get();
     }
 
     /**
@@ -43,11 +45,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($post = 0)
+    public function show($id)
     {
-        $posts = ['post 0', 'post 1', 'post 2'];
-
-        return ['show' => $posts[$post]];
+        return DB::table('posts')->where('id', $id)->get();
     }
 
     /**
